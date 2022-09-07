@@ -1,2 +1,2 @@
 #!/bin/bash
-echo $(dirCount  "$_path") | wc -l 
+$path | wc -l
