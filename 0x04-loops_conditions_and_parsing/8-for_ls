@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+# Bash script displays the content of the directory in list format
+# where only part of the name is displayed
+
+for i in *; do
+    echo "$i" | cut -d "-" -f 2
+done
