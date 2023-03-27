@@ -16,6 +16,7 @@
 # ssh_config(5) man page.
 
 Host *
+User ubuntu
 #   ForwardAgent no
 #   ForwardX11 no
 #   ForwardX11Trusted yes
