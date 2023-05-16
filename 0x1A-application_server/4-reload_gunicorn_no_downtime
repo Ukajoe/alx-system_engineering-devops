@@ -1,0 +1,44 @@
+# !/usr/bin/env bash
+
+# A simple Bash script to reload Gunicorn # in a graceful way by updating an
+
+# application without downtime
+
+  oldpid=$(<./deploy/gunicorn.pid)
+
+  # forget the old kill -HUP 
+
+  kill -USR2 $oldpid
+
+  sleep 1
+
+  timeout=5
+
+  while [[ $timeout -gt 0 ]]; do
+
+    newpid=$(<./deploy/gunicorn.pid.2) && kill -0 $newpid
+
+    if [[ $? -eq 0 ]]; then
+
+      break
+
+    else
+
+      sleep 0.5
+
+      (( timeout-- ))
+
+    fi
+
+  done;
+
+  # shutdown old
+
+  echo "success. newpid=$newpid"
+
+  kill -WINCH $oldpid
+
+  sleep 1
+
+  kill -TERM $oldpid
+
